@@ -1,0 +1,30 @@
+<div class="col-md-12 header">
+  <div class="col-md-2 header-info-user">
+    <img src="../../assets/profile.png" alt="Profile pic" class="header-pic">
+    <span class="header-username">{{user.name}}</span>
+    <span>{{status}}</span>
+    <span>{{location}}</span>
+  </div>
+  <div class="col-md-8 header-center">
+    <button id="playPauseButton" (click)="playPauseButtonClick()" class="btn" [ngClass]="{'btn-success': !this.playing, 'btn-warning': this.playing}"><i class="fa" [ngClass]="{'fa-play': !this.playing, 'fa-pause': this.playing}"></i></button>
+    <div ngbDropdown class="d-inline-block" *ngIf="!this.playing">
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Location</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button class="dropdown-item" (click)="locationOfficeClick()">Office</button>
+        <button class="dropdown-item"(click)="locationHomeClick()">Home</button>
+      </div>
+    </div>
+    <div ngbDropdown class="d-inline-block" *ngIf="this.playing">
+      <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Status</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+        <button class="dropdown-item status-high" (click)="statusHighClick()">Very Busy <i class="fa fa-exclamation-triangle"></i></button>
+        <button class="dropdown-item status-mid" (click)="statusMidClick()">Busy - Normal Work</button>
+        <button class="dropdown-item status-low" (click)="statusLowClick()">Free - Can I help?</button>
+      </div>
+    </div>
+    <button class="btn btn-danger" [hidden]="!this.playing" (click)="endWorkSessionClick()">Done</button>
+  </div>
+  <div class="col-md-2">
+
+  </div>
+</div>
