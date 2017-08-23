@@ -20,55 +20,66 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.playing = false;
     this.status = null;
+    this.isFirst = true;
   }
 
-  playPauseButtonClick()
-  {
+
+  // I'm handling all the logic of creating and starting/ending a session here.
+  // It's not working properly. I need to make a service or other controller
+  // to handle this logic. #TODO
+  playPauseButtonClick() {
     this.playing = !this.playing;
-    if(this.playing) {
-      var workSession: WorkSession;
-        workSession.id = 
+    if (this.playing && !this.isFirst) {
+      workSession.startTime.push(new Date());
     }
-    
+    if (this.playing && this.isFirst) {
+      var workSession = <WorkSession>{};
+      // var workSession = new workSession();
+      workSession.startTime = [];
+      workSession.endTime = [];
+      this.isFirst = false;
+
+      workSession.location = this.location;
+      workSession.startTime.push(new Date());
+    }
+    if (!this.playing) {
+      workSession.endTime.push(new Date());
+    }
+    console.log(workSession);
+
   };
 
-  endWorkSessionClick()
-  {
+  endWorkSessionClick() {
     this.playing = !this.playing;
   };
 
-// ****************************************
-// Functions - Status - Click
-// ****************************************
-  statusHighClick()
-  {
+  // ****************************************
+  // Functions - Status - Click
+  // ****************************************
+  statusHighClick() {
     this.status = 3;
   }
-  statusMidClick()
-  {
+  statusMidClick() {
     this.status = 2;
-  } 
-  statusLowClick()
-  {
+  }
+  statusLowClick() {
     this.status = 1.
   }
-// ****************************************
+  // ****************************************
 
 
-// ****************************************
-// Functions - Location - Click
-// ****************************************
+  // ****************************************
+  // Functions - Location - Click
+  // ****************************************
 
-locationOfficeClick()
-{
-  this.location = "Office"
-}
-locationHomeClick()
-{
-  this.location = "Home"
-}
+  locationOfficeClick() {
+    this.location = "Office"
+  }
+  locationHomeClick() {
+    this.location = "Home"
+  }
 
-// ****************************************
+  // ****************************************
 
 
 

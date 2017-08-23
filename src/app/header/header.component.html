@@ -7,16 +7,16 @@
   </div>
   <div class="col-md-8 header-center">
     <button id="playPauseButton" (click)="playPauseButtonClick()" class="btn" [ngClass]="{'btn-success': !this.playing, 'btn-warning': this.playing}"><i class="fa" [ngClass]="{'fa-play': !this.playing, 'fa-pause': this.playing}"></i></button>
-    <div ngbDropdown class="d-inline-block" *ngIf="!this.playing">
-      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Location</button>
-      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+    <div ngbDropdown class="d-inline-block" *ngIf="!this.playing && this.isFirst">
+      <button class="btn btn-outline-primary" id="locationDropdown" ngbDropdownToggle>Location</button>
+      <div ngbDropdownMenu aria-labelledby="locationDropdown">
         <button class="dropdown-item" (click)="locationOfficeClick()">Office</button>
         <button class="dropdown-item"(click)="locationHomeClick()">Home</button>
       </div>
     </div>
     <div ngbDropdown class="d-inline-block" *ngIf="this.playing">
-      <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Status</button>
-      <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+      <button class="btn btn-outline-primary" id="statusDropdown" ngbDropdownToggle>Status</button>
+      <div ngbDropdownMenu aria-labelledby="statusDropdown">
         <button class="dropdown-item status-high" (click)="statusHighClick()">Very Busy <i class="fa fa-exclamation-triangle"></i></button>
         <button class="dropdown-item status-mid" (click)="statusMidClick()">Busy - Normal Work</button>
         <button class="dropdown-item status-low" (click)="statusLowClick()">Free - Can I help?</button>
