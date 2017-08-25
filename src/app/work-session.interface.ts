@@ -1,6 +1,7 @@
 // Using name as 'work-session.interface.ts'
 export interface WorkSession {
     // id: Number;
+    playing: boolean;
     startTime: Array<Date>;
     endTime?: Array<Date>;
     location: string;

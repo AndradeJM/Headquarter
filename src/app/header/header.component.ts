@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { WorkSessionService } from '../services/work-session.service';
 import { WorkSession } from '../work-session.interface';
 
 @Component({
@@ -10,47 +11,38 @@ export class HeaderComponent implements OnInit {
 
   @Input() user: object;
 
-  playing: boolean;
+  // playing: boolean;
   status: number;
   location: string;
   isFirst: boolean;
+  workSession: WorkSession;
 
-  constructor() { }
+  constructor(
+    private workSessionService: WorkSessionService
+  ) { }
 
   ngOnInit() {
-    this.playing = false;
-    this.status = null;
+    // this.playing = false;
+    // this.status = null;
     this.isFirst = true;
   }
 
+  newWorkSessionClick() {
+    // this.status = null;
+    this.workSession = this.workSessionService.newWorkSession();
+    this.isFirst = false;
+  }
 
-  // I'm handling all the logic of creating and starting/ending a session here.
-  // It's not working properly. I need to make a service or other controller
-  // to handle this logic. #TODO
-  playPauseButtonClick() {
-    this.playing = !this.playing;
-    if (this.playing && !this.isFirst) {
-      workSession.startTime.push(new Date());
-    }
-    if (this.playing && this.isFirst) {
-      var workSession = <WorkSession>{};
-      // var workSession = new workSession();
-      workSession.startTime = [];
-      workSession.endTime = [];
-      this.isFirst = false;
-
-      workSession.location = this.location;
-      workSession.startTime.push(new Date());
-    }
-    if (!this.playing) {
-      workSession.endTime.push(new Date());
-    }
+  playPauseButtonClick(workSession) {
+    this.workSessionService.playPauseWorksession(workSession);    
+    this.workSession.location = this.location;
     console.log(workSession);
+  }
 
-  };
+
 
   endWorkSessionClick() {
-    this.playing = !this.playing;
+    // WorkSessionService.endWorkSession(workSession);
   };
 
   // ****************************************
@@ -72,11 +64,11 @@ export class HeaderComponent implements OnInit {
   // Functions - Location - Click
   // ****************************************
 
-  locationOfficeClick() {
-    this.location = "Office"
+  locationOfficeClick(workSesion) {
+    workSesion.location = "Office"
   }
-  locationHomeClick() {
-    this.location = "Home"
+  locationHomeClick(workSesion) {
+    workSesion.location = "Home"
   }
 
   // ****************************************
