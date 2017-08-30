@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WorkSessionService } from '../services/work-session.service';
-import { WorkSession } from '../work-session.interface';
+import { WorkSession } from '../interfaces/work-session.interface';
+import { User } from '../interfaces/user.interface';
+
 
 @Component({
   selector: 'app-header',
@@ -9,12 +11,11 @@ import { WorkSession } from '../work-session.interface';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() user: object;
+  @Input() user: User;
 
-  // playing: boolean;
   status: number;
   location: string;
-  isFirst: boolean;
+  isWorking: boolean;
   workSession: WorkSession;
 
   constructor(
@@ -22,27 +23,27 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.playing = false;
-    // this.status = null;
-    this.isFirst = true;
+    this.isWorking = false;
   }
 
   newWorkSessionClick() {
-    // this.status = null;
     this.workSession = this.workSessionService.newWorkSession();
-    this.isFirst = false;
+    this.isWorking = true;
+    // this.user.
   }
 
   playPauseButtonClick(workSession) {
+    if(this.location) {
+      this.workSession.location = this.location;
+    }
     this.workSessionService.playPauseWorksession(workSession);    
-    this.workSession.location = this.location;
-    console.log(workSession);
   }
 
 
 
-  endWorkSessionClick() {
-    // WorkSessionService.endWorkSession(workSession);
+  endWorkSessionClick(workSession) {
+    this.workSessionService.endWorkSession(workSession);
+    this.isWorking = false;
   };
 
   // ****************************************
@@ -65,10 +66,10 @@ export class HeaderComponent implements OnInit {
   // ****************************************
 
   locationOfficeClick(workSesion) {
-    workSesion.location = "Office"
+    this.workSession.location = "Office"
   }
   locationHomeClick(workSesion) {
-    workSesion.location = "Home"
+    this.workSession.location = "Home"
   }
 
   // ****************************************

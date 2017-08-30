@@ -9,6 +9,7 @@ export class AppComponent {
   company = 'PoaTek';
   title = 'Headquarter';
   user = {
-    name: "Employee"
+    name: "Employee",
+    expectedWorkHoursForTheDay: 8
   }
 }

@@ -1,56 +1,91 @@
 <div class="row header">
-  <div class="col-md-2 header-left">
+  <div class="col-md-2 col-sm-2 col-xs-1">
     <img src="../../assets/profile.png" alt="Profile pic" class="header-pic">
     <span class="header-username">{{user.name}}</span>
   </div>
-  <div class="col-md-8">
-    <button id="newWorkSessionButton" (click)="newWorkSessionClick()" class="btn btn-primary" *ngIf="this.isFirst">New Work Session</button>
-    <button id="playPauseButton" (click)="playPauseButtonClick(workSession)" class="btn" *ngIf="!this.isFirst" [ngClass]="{'btn-success': !workSession.playing, 'btn-warning': workSession.playing}"><i class="fa" [ngClass]="{'fa-play': !workSession.playing, 'fa-pause': workSession.playing}"></i></button>
-    <div ngbDropdown class="d-inline-block" *ngIf="!this.isFirst && !workSession.playing && !workSession.location">
-        <button class="btn btn-outline-primary" id="locationDropdown" ngbDropdownToggle>Location</button>
-        <div ngbDropdownMenu aria-labelledby="locationDropdown">
-          <button class="dropdown-item" (click)="locationOfficeClick(workSession)">Office</button>
-          <button class="dropdown-item" (click)="locationHomeClick(workSession)">Home</button>
-        </div>
+  <div class="col-md-2 col-sm-2 col-xs-1">
+    <button id="newWorkSessionButton" (click)="newWorkSessionClick()" class="btn btn-primary" *ngIf="!this.isWorking">New Work Session</button>
+    <button id="playPauseButton" (click)="playPauseButtonClick(workSession)" class="btn" *ngIf="this.isWorking" [ngClass]="{'btn-success': !workSession.playing, 'btn-warning': workSession.playing}"
+      [disabled]="!workSession.location"><i class="fa" [ngClass]="{'fa-play': !workSession.playing, 'fa-pause': workSession.playing}"></i></button>
+    <div ngbDropdown class="d-inline-block" *ngIf="this.isWorking && !workSession.playing">
+      <button class="btn btn-outline-primary" id="locationDropdown" ngbDropdownToggle>Location</button>
+      <div ngbDropdownMenu aria-labelledby="locationDropdown">
+        <button class="dropdown-item" (click)="locationOfficeClick(workSession)">Office <i class="fa fa-check" *ngIf="workSession.location == 'Office'"></i></button>
+        <button class="dropdown-item" (click)="locationHomeClick(workSession)">Home <i class="fa fa-check" *ngIf="workSession.location == 'Home'"></i></button>
       </div>
+    </div>
+    <div ngbDropdown class="d-inline-block" *ngIf="this.isWorking && workSession.playing">
+      <button class="btn btn-outline-primary" id="statusDropdown" ngbDropdownToggle>Status</button>
+      <div ngbDropdownMenu aria-labelledby="statusDropdown">
+        <button class="dropdown-item status-high" (click)="statusHighClick()" [ngClass]="{'selected': this.status == 3}">Very Busy <i class="fa fa-exclamation-triangle"></i></button>
+        <button class="dropdown-item status-mid" (click)="statusMidClick()" [ngClass]="{'selected': this.status == 2}">Busy - Normal Work</button>
+        <button class="dropdown-item status-low" (click)="statusLowClick()" [ngClass]="{'selected': this.status == 1}">Free - Can I help?</button>
+      </div>
+    </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-4 col-sm-5 col-xs-8">
+    <div class="col-md-6" *ngIf="this.isWorking">
+      <p id="remainingTimeToWorkLabel">Remaining:</p>
+      <ngb-timepicker [(ngModel)]="user.remainingTimeToWork" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
+    </div>
+    <div class="col-md-6" *ngIf="this.isWorking && workSession.playing">
+      <p id="leavingTimeLabel">Leaving at:</p>
+      <ngb-timepicker [(ngModel)]="user.leavingTime" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
+    </div>
+  </div>
+  <div class="col-md-2 col-sm-2 col-xs-1">
 
+  </div>
+  <div class="col-md-2 col-sm-1 col-xs-1">
+    <div class="header-right">
+      <button class="btn"><i class="fa fa-cog"></i></button>
+      <button class="btn btn-danger" *ngIf="this.isWorking && workSession.playing" (click)="endWorkSessionClick(workSession)">Done</button>
+      <button class="btn btn-danger" *ngIf="!this.isWorking || !workSession.playing"><i class="fa fa-sign-out"></i></button>
+    </div>
+  </div>
+</div>
+{{user | json}} {{this.isWorking}}
+<hr> {{workSession | json}}
+
+<!-- 
+<pre>Selected user.leavingTime: {{user.leavingTime | json}}</pre>
+<pre>Selected user.remainingTimeToWork: {{user.remainingTimeToWork | json}}</pre>
+<input type="time" class=""> -->
+
+<!-- 
+<div class="row col-md-6" style="vertical-align: middle;">
+  <p id="">Expected exit time: </p>
+  <ngb-timepicker [(ngModel)]="time" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
+</div>
+<div class="row col-md-6" style="vertical-align: middle;">
+  <p id="">Remaining: </p>
+  <ngb-timepicker [(ngModel)]="time" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
+</div>
+
+
+
+<div class="col-md-3">
+  <div class="row">
+    <p id="leavingTimeLabel">Expected exit time: </p>
+    <ngb-timepicker [(ngModel)]="time" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
+  </div>
+</div>
+<div class="col-md-3">
+  <div class="row">
+    <p id="remainingTimeToWorkLabel">Remaining: </p>
+    <ngb-timepicker [(ngModel)]="time" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
   </div>
 </div>
 
 
-<!-- 
-<div class="col-sm-12 header">
-    <div class="col-sm-3 header-info-user">
-      <img src="../../assets/profile.png" alt="Profile pic" class="header-pic">
-      <span class="header-username">{{user.name}}</span>
-      <span>{{status}}</span>
-      <span>{{location}}</span>
-    </div>
-    <div class="col-sm-7">
-      <button id="newWorkSessionButton" (click)="newWorkSessionClick()" class="btn btn-primary" *ngIf="this.isFirst">New Work Session</button>
-      <button id="playPauseButton" (click)="playPauseButtonClick(workSession)" class="btn" *ngIf="!this.isFirst" [ngClass]="{'btn-success': !workSession.playing, 'btn-warning': workSession.playing}"><i class="fa" [ngClass]="{'fa-play': !workSession.playing, 'fa-pause': workSession.playing}"></i></button>
-      <div ngbDropdown class="d-inline-block" *ngIf="!workSession.playing && !workSession.location">
-        <button class="btn btn-outline-primary" id="locationDropdown" ngbDropdownToggle>Location</button>
-        <div ngbDropdownMenu aria-labelledby="locationDropdown">
-          <button class="dropdown-item" (click)="locationOfficeClick(workSession)">Office</button>
-          <button class="dropdown-item" (click)="locationHomeClick(workSession)">Home</button>
-        </div>
-      </div>
-      <div ngbDropdown class="d-inline-block" *ngIf="workSession.playing">
-        <button class="btn btn-outline-primary" id="statusDropdown" ngbDropdownToggle>Status</button>
-        <div ngbDropdownMenu aria-labelledby="statusDropdown">
-          <button class="dropdown-item status-high" (click)="statusHighClick()">Very Busy <i class="fa fa-exclamation-triangle"></i></button>
-          <button class="dropdown-item status-mid" (click)="statusMidClick()">Busy - Normal Work</button>
-          <button class="dropdown-item status-low" (click)="statusLowClick()">Free - Can I help?</button>
-        </div>
-      </div>
-       <button class="btn btn-danger" [hidden]="!workSession.playing && this.isFirst" (click)="endWorkSessionClick()">Done</button> 
-    </div>
-    <div class="col-sm-2">
-  
-    </div>
-  </div>
 
-   -->
+<div class="col-md-4">
+  <div class="col-md-6" style="vertical-align: middle;">
+    <p id="leavingTimeLabel">Leaving at: </p>
+    <ngb-timepicker [(ngModel)]="time" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
+  </div>
+  <div class="col-md-6" style="vertical-align: middle;">
+    <p id="remainingTimeToWorkLabel">Remaining: </p>
+    <ngb-timepicker [(ngModel)]="time" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
+  </div>
+</div> -->

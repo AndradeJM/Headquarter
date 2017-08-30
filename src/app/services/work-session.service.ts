@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WorkSession } from '../work-session.interface';
+import { WorkSession } from '../interfaces/work-session.interface';
 
 @Injectable()
 export class WorkSessionService {
@@ -10,10 +10,10 @@ export class WorkSessionService {
     var workSession = <WorkSession>{};
     workSession.startTime = [];
     workSession.endTime = [];
-    // workSession.playing = false;
     workSession.location = null;
+    // workSession.workedHours = 0;
     return workSession;
-  }
+  };
 
   playPauseWorksession(workSession) {
     workSession.playing = !workSession.playing;
@@ -24,9 +24,22 @@ export class WorkSessionService {
     if (!workSession.playing) {
       workSession.endTime.push(new Date());
     }
+    this.calculateWorkedHouser(workSession);
+  };
 
-  }
+  endWorkSession(workSession) {
+    workSession.endTime.push(new Date());
+    workSession.playing = false;
+  };
 
+  calculateWorkedHouser(workSession) {
+    for(var startTime in workSession.startTime) {
+      for(var endTime in workSession.endTime) {
+        // startTime and endTime are strings? wtf?
+        // let start = Date.UTC(startTime.getFullYear(), startTime.getMonth(), startTime.getDate());
+      }
+    }
+  };
 
 
 }

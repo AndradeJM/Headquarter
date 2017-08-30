@@ -1,28 +1,35 @@
 .header
  {
     line-height: 50px; 
-    /* border-radius: 20px;
+    border-radius: 20px;
     border: 2px solid #73AD21;
-    padding: 20px;
-    margin-left: 5px; */
+    /* padding: 20px; */
+    margin-left: 1px;
+    margin-top: 20px;
+    width: 100%;
+    padding-bottom: 0;
+    height: auto;
+    vertical-align: middle;
+    align-items: center;
 }
 .header-left
 {
-    margin-left: 10px;
+    float: left;
 }
-
+.header-right
+{
+    float: right;
+}
 .header-info-user
 {
     float: left;
 }
-
 .header-pic
 {
     width: 50px;
     height: 50px;
     border-radius: 50%;
 }
-
 .header-username
 {
     line-height: 50px;
@@ -31,16 +38,37 @@
     font-family: sans-serif;
     font-weight: bold;
 }
-
 .status-high
 {
     color:  red;
 }
-/* .status-mid
+.status-mid
 {
-    background-color: yellow;
+    /* background-color:  */
 }
 .status-low
 {
-    background-color: green;
-} */
+    /* background-color:  */
+}
+.selected
+{
+    background-color: rgb(202, 202, 202);
+    border-radius: 5%;
+}
+.endWorkSessionButton
+{
+
+}
+
+#leavingTimeLabel
+{
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 0;
+}
+#remainingTimeToWorkLabel
+{
+    float: left;
+    margin-right: 3px;
+    margin-bottom: 0;
+}

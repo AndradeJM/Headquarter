@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+
 import { HeaderComponent } from './header/header.component';
 import { WorkSessionService } from './services/work-session.service';
 
@@ -15,7 +17,8 @@ import { WorkSessionService } from './services/work-session.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    FormsModule
   ],
   providers: [WorkSessionService],
   bootstrap: [AppComponent]
