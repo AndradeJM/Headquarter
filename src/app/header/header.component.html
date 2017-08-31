@@ -1,9 +1,9 @@
 <div class="row header">
-  <div class="col-md-2 col-sm-2 col-xs-1">
+  <div class="col-md-3 col-sm-3 col-xs-2" id="user-info-container">
     <img src="../../assets/profile.png" alt="Profile pic" class="header-pic">
     <span class="header-username">{{user.name}}</span>
   </div>
-  <div class="col-md-2 col-sm-2 col-xs-1">
+  <div class="col-md-3 col-sm-3 col-xs-2">
     <button id="newWorkSessionButton" (click)="newWorkSessionClick()" class="btn btn-primary" *ngIf="!this.isWorking">New Work Session</button>
     <button id="playPauseButton" (click)="playPauseButtonClick(workSession)" class="btn" *ngIf="this.isWorking" [ngClass]="{'btn-success': !workSession.playing, 'btn-warning': workSession.playing}"
       [disabled]="!workSession.location"><i class="fa" [ngClass]="{'fa-play': !workSession.playing, 'fa-pause': workSession.playing}"></i></button>
@@ -23,12 +23,12 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4 col-sm-5 col-xs-8">
-    <div class="col-md-6" *ngIf="this.isWorking">
+  <div class="col-md-2 col-sm-3 col-xs-6">
+    <!-- <div class="col-md-6" *ngIf="this.isWorking">
       <p id="remainingTimeToWorkLabel">Remaining:</p>
       <ngb-timepicker [(ngModel)]="user.remainingTimeToWork" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
-    </div>
-    <div class="col-md-6" *ngIf="this.isWorking && workSession.playing">
+    </div> -->
+    <div class="col-md-12" *ngIf="this.isWorking && workSession.playing">
       <p id="leavingTimeLabel">Leaving at:</p>
       <ngb-timepicker [(ngModel)]="user.leavingTime" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
     </div>
@@ -38,54 +38,21 @@
   </div>
   <div class="col-md-2 col-sm-1 col-xs-1">
     <div class="header-right">
-      <button class="btn"><i class="fa fa-cog"></i></button>
+      <button class="btn" (click)="isSetting = !isSetting" [attr.aria-expanded]="isSetting" aria-controls="settings"><i class="fa fa-cog"></i></button>
       <button class="btn btn-danger" *ngIf="this.isWorking && workSession.playing" (click)="endWorkSessionClick(workSession)">Done</button>
       <button class="btn btn-danger" *ngIf="!this.isWorking || !workSession.playing"><i class="fa fa-sign-out"></i></button>
     </div>
   </div>
 </div>
-{{user | json}} {{this.isWorking}}
-<hr> {{workSession | json}}
 
-<!-- 
-<pre>Selected user.leavingTime: {{user.leavingTime | json}}</pre>
-<pre>Selected user.remainingTimeToWork: {{user.remainingTimeToWork | json}}</pre>
-<input type="time" class=""> -->
-
-<!-- 
-<div class="row col-md-6" style="vertical-align: middle;">
-  <p id="">Expected exit time: </p>
-  <ngb-timepicker [(ngModel)]="time" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
-</div>
-<div class="row col-md-6" style="vertical-align: middle;">
-  <p id="">Remaining: </p>
-  <ngb-timepicker [(ngModel)]="time" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
-</div>
-
-
-
-<div class="col-md-3">
-  <div class="row">
-    <p id="leavingTimeLabel">Expected exit time: </p>
-    <ngb-timepicker [(ngModel)]="time" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
-  </div>
-</div>
-<div class="col-md-3">
-  <div class="row">
-    <p id="remainingTimeToWorkLabel">Remaining: </p>
-    <ngb-timepicker [(ngModel)]="time" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
+<div id="settings" [ngbCollapse]="!isSetting">
+  <div class="card">
+    <div class="card-body">
+      Here will be options to better please the user and show/hide UI elements. #TODO
+    </div>
   </div>
 </div>
 
-
-
-<div class="col-md-4">
-  <div class="col-md-6" style="vertical-align: middle;">
-    <p id="leavingTimeLabel">Leaving at: </p>
-    <ngb-timepicker [(ngModel)]="time" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
-  </div>
-  <div class="col-md-6" style="vertical-align: middle;">
-    <p id="remainingTimeToWorkLabel">Remaining: </p>
-    <ngb-timepicker [(ngModel)]="time" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
-  </div>
-</div> -->
+<!-- For debugging purpose... 
+ {{user | json}} "this.isWorking: " {{this.isWorking}}
+<hr> {{workSession | json}}  -->

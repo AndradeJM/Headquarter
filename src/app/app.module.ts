@@ -8,11 +8,13 @@ import { FormsModule } from '@angular/forms';
 
 import { HeaderComponent } from './header/header.component';
 import { WorkSessionService } from './services/work-session.service';
+import { OfficeComponent } from './office/office.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    OfficeComponent
   ],
   imports: [
     BrowserModule,

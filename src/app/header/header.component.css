@@ -7,22 +7,15 @@
     margin-left: 1px;
     margin-top: 20px;
     width: 100%;
-    padding-bottom: 0;
+    padding-bottom: 2px;
     height: auto;
     vertical-align: middle;
     align-items: center;
 }
-.header-left
-{
-    float: left;
-}
+
 .header-right
 {
     float: right;
-}
-.header-info-user
-{
-    float: left;
 }
 .header-pic
 {

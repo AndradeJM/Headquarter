@@ -1,8 +1,9 @@
-<div style="text-align:center">
+<div id="main-header">
   <h1>
-    {{company}} {{title}}
+    <img id="company-logo" src="/../assets/poatek_logo.png" alt="Company Logo"> {{company}} {{title}}
   </h1>
 </div>
 <app-header [user]="user"></app-header>
+<app-office></app-office>
 
 <router-outlet></router-outlet>
