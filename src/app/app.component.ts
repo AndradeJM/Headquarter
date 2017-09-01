@@ -8,8 +8,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   company = 'PoaTek';
   title = 'Headquarter';
-  user = {
-    name: "Employee",
-    expectedWorkHoursForTheDay: 8
-  }
+  // user = {
+  //   name: "Employee",
+  //   expectedWorkHoursForTheDay: 8
+  // }
 }

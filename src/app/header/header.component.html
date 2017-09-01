@@ -1,7 +1,7 @@
 <div class="row header">
   <div class="col-md-3 col-sm-3 col-xs-2" id="user-info-container">
     <img src="../../assets/profile.png" alt="Profile pic" class="header-pic">
-    <span class="header-username">{{user.name}}</span>
+    <span class="header-username">{{user.firstName}} {{user.lastName}}</span>
   </div>
   <div class="col-md-3 col-sm-3 col-xs-2">
     <button id="newWorkSessionButton" (click)="newWorkSessionClick()" class="btn btn-primary" *ngIf="!this.isWorking">New Work Session</button>

@@ -1,24 +1,44 @@
-<div class="container-fluid">
-    <h3 class="component-title">Office</h3>
-  <!--I just placed some elements to have some idea of how I wish this layout to be. Need some thinking in here.  -->
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card">
-        <label>At office: </label>
-        <button class="btn">3</button>
+<div class="col-md-7 office">
+  <div class="office-header">
+    <h3>Office <i class="fa fa-users"></i></h3>
+    <hr>
+  </div>
+  <div class="row office-container">
+    <div class="col-md-5">
+      <div class="info-card">
+        <label class="info-card-label">At office:</label>
+        <span class="info-card-data">3</span>
       </div>
-      <div class="card">
-          <label>Remaining to come: </label>
-          <button class="btn">5</button>
-        </div>
+      <div class="info-card">
+        <label class="info-card-label">Remaining to come:</label>
+        <span class="info-card-data">5</span>
+      </div>
     </div>
-    <div class="col-md-6">
-      <label>Very busy: </label>
-      <button class="btn">1</button>
-      <label>Busy: </label>
-      <button class="btn">2</button>
-      <label>Free: </label>
-      <button class="btn">0</button>
+    <div class="col-md-3">
+      <div class="info-card">
+        <label id="label-high-status">Very busy:</label>
+        <span class="info-card-data">1</span>
+      </div>
+      <div class="info-card">
+        <label id="label-mid-status">Busy:</label>
+        <span class="info-card-data">2</span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="info-card">
+        <label id="label-low-status">Free:</label>
+        <span class="info-card-data">0</span>
+      </div>
+      <div class="knowlodge-available-card">
+        <label class="info-card-label">Knowlodge available:</label>
+        <div class="info-card-data">
+          <img src="./../assets/angular-icon.svg" alt="Angular" width="25" height="25" placement="top" ngbTooltip="Angular">
+          <img src="./../assets/apple-icon.png" alt="iOS" width="25" height="25" placement="top" ngbTooltip="iOS">
+          <img src="./../assets/android-icon.png" alt="Android" width="25" height="25" placement="top" ngbTooltip="Android">
+          <img src="./../assets/c-sharp-icon.png" alt="C#" width="25" height="25" placement="top" ngbTooltip="C#">
+          <img src="./../assets/react-icon.png" alt="React" width="25" height="25" placement="top" ngbTooltip="React">
+        </div>
+      </div>
     </div>
   </div>
 

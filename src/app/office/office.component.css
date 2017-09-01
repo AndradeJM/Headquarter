@@ -1,5 +1,61 @@
-.component-title
+.office
 {
+    border-radius: 10px;
+    border: 2px solid #73AD21;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 99%;
+    padding-bottom: 2px;
+    height: auto;
+    vertical-align: middle;
+    align-items: center;
     text-align: center;
     vertical-align: middle;
+}
+.office-header
+{
+    margin-top: 8px;
+}
+.info-card
+{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+.office-container
+{
+    padding-bottom: 5px;
+}
+.info-card-data
+{
+    background-color: #e5e7d8;
+    border: 1px solid transparent;
+    padding: .5rem .75rem;
+    line-height: 1.25;
+    border-radius: .25rem;
+}
+.info-card-label
+{
+    margin-bottom: 4px; 
+}
+#label-high-status{
+    margin-bottom: 2px; 
+    border-bottom: 2px solid red;
+    /* border-bottom-color: red; */
+}
+#label-mid-status{
+    margin-bottom: 2px; 
+    border-bottom: 2px solid yellow;
+}
+#label-low-status{
+    margin-bottom: 2px; 
+    border-bottom: 2px solid green;
+}
+.knowlodge-available-card
+{
+    /* display: flex; */
+    /* flex-direction: column; */
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
 }
