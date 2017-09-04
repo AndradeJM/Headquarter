@@ -5,7 +5,7 @@ export interface WorkSession {
     playing: boolean;
     startTime: Array<Date>;
     endTime?: Array<Date>;
-    location: string;
+    // location: string;
 }
 
 // class workSession implements WorkSession {

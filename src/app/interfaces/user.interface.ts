@@ -1,3 +1,5 @@
+import { WorkSession } from './work-session.interface';
+
 export interface User {
     id: number;
     username: string;
@@ -10,4 +12,7 @@ export interface User {
     leavingTime?: number;
     config?: object;
     isWorking: boolean;
+    workSessions: Array<WorkSession>;
+    status: number;
+    location: string;
 }

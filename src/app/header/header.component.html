@@ -4,17 +4,17 @@
     <span class="header-username">{{user.firstName}} {{user.lastName}}</span>
   </div>
   <div class="col-md-3 col-sm-3 col-xs-2">
-    <button id="newWorkSessionButton" (click)="newWorkSessionClick()" class="btn btn-primary" *ngIf="!this.isWorking">New Work Session</button>
-    <button id="playPauseButton" (click)="playPauseButtonClick(workSession)" class="btn" *ngIf="this.isWorking" [ngClass]="{'btn-success': !workSession.playing, 'btn-warning': workSession.playing}"
-      [disabled]="!workSession.location"><i class="fa" [ngClass]="{'fa-play': !workSession.playing, 'fa-pause': workSession.playing}"></i></button>
-    <div ngbDropdown class="d-inline-block" *ngIf="this.isWorking && !workSession.playing">
+    <button id="newWorkSessionButton" (click)="newWorkSessionClick()" class="btn btn-primary" *ngIf="!user.isWorking">New Work Session</button>
+    <button id="playPauseButton" (click)="playPauseButtonClick(workSession)" class="btn" *ngIf="user.isWorking" [ngClass]="{'btn-success': !workSession.playing, 'btn-warning': workSession.playing}"
+      [disabled]="!user.location"><i class="fa" [ngClass]="{'fa-play': !workSession.playing, 'fa-pause': workSession.playing}"></i></button>
+    <div ngbDropdown class="d-inline-block" *ngIf="user.isWorking && !workSession.playing">
       <button class="btn btn-outline-primary" id="locationDropdown" ngbDropdownToggle>Location</button>
       <div ngbDropdownMenu aria-labelledby="locationDropdown">
-        <button class="dropdown-item" (click)="locationOfficeClick(workSession)">Office <i class="fa fa-check" *ngIf="workSession.location == 'Office'"></i></button>
-        <button class="dropdown-item" (click)="locationHomeClick(workSession)">Home <i class="fa fa-check" *ngIf="workSession.location == 'Home'"></i></button>
+        <button class="dropdown-item" (click)="locationOfficeClick()">Office <i class="fa fa-check" *ngIf="user.location == 'Office'"></i></button>
+        <button class="dropdown-item" (click)="locationHomeClick()">Home <i class="fa fa-check" *ngIf="user.location == 'Home'"></i></button>
       </div>
     </div>
-    <div ngbDropdown class="d-inline-block" *ngIf="this.isWorking && workSession.playing">
+    <div ngbDropdown class="d-inline-block" *ngIf="user.isWorking && workSession.playing">
       <button class="btn btn-outline-primary" id="statusDropdown" ngbDropdownToggle>Status</button>
       <div ngbDropdownMenu aria-labelledby="statusDropdown">
         <button class="dropdown-item status-high" (click)="statusHighClick()" [ngClass]="{'selected': this.status == 3}">Very Busy <i class="fa fa-exclamation-triangle"></i></button>
@@ -24,11 +24,11 @@
     </div>
   </div>
   <div class="col-md-2 col-sm-3 col-xs-6">
-    <!-- <div class="col-md-6" *ngIf="this.isWorking">
+    <!-- <div class="col-md-6" *ngIf="user.isWorking">
       <p id="remainingTimeToWorkLabel">Remaining:</p>
       <ngb-timepicker [(ngModel)]="user.remainingTimeToWork" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
     </div> -->
-    <div class="col-md-12" *ngIf="this.isWorking && workSession.playing">
+    <div class="col-md-12" *ngIf="user.isWorking && workSession.playing">
       <p id="leavingTimeLabel">Leaving at:</p>
       <ngb-timepicker [(ngModel)]="user.leavingTime" [seconds]="false" [hourStep]="1" [minuteStep]="5" [spinners]="false"></ngb-timepicker>
     </div>
@@ -39,8 +39,8 @@
   <div class="col-md-2 col-sm-1 col-xs-1">
     <div class="header-right">
       <button class="btn" (click)="isSetting = !isSetting" [attr.aria-expanded]="isSetting" aria-controls="settings"><i class="fa fa-cog"></i></button>
-      <button class="btn btn-danger" *ngIf="this.isWorking && workSession.playing" (click)="endWorkSessionClick(workSession)">Done</button>
-      <button class="btn btn-danger" *ngIf="!this.isWorking || !workSession.playing"><i class="fa fa-sign-out"></i></button>
+      <button class="btn btn-danger" *ngIf="user.isWorking && workSession.playing" (click)="endWorkSessionClick(workSession)">Done</button>
+      <a [routerLink]="['/login']"><button class="btn btn-danger" *ngIf="!user.isWorking || !workSession.playing" (click)="onSignOut(workSession)"><i class="fa fa-sign-out"></i></button></a>
     </div>
   </div>
 </div>
@@ -52,7 +52,7 @@
     </div>
   </div>
 </div>
-
-<!-- For debugging purpose... 
- {{user | json}} "this.isWorking: " {{this.isWorking}}
-<hr> {{workSession | json}}  -->
+<!--  
+ For debugging purpose... 
+ {{user | json}}
+<hr> {{workSession | json}}    -->

@@ -7,27 +7,27 @@
     <div class="col-md-5">
       <div class="info-card">
         <label class="info-card-label">At office:</label>
-        <span class="info-card-data">3</span>
+        <span class="info-card-data">{{workingAtOfficeCounter}}</span>
       </div>
       <div class="info-card">
         <label class="info-card-label">Remaining to come:</label>
-        <span class="info-card-data">5</span>
+        <span class="info-card-data">#ToDo</span>
       </div>
     </div>
     <div class="col-md-3">
       <div class="info-card">
-        <label id="label-high-status">Very busy:</label>
-        <span class="info-card-data">1</span>
+        <label id="label-high-status" placement="right" ngbTooltip="Do not disturb!">Very busy:</label>
+        <span class="info-card-data">{{veryBusyUsersCounter}}</span>
       </div>
       <div class="info-card">
-        <label id="label-mid-status">Busy:</label>
-        <span class="info-card-data">2</span>
+        <label id="label-mid-status" placement="right" ngbTooltip="Normal work, answer in few minutes.">Busy:</label>
+        <span class="info-card-data">{{busyUsersCounter}}</span>
       </div>
     </div>
     <div class="col-md-4">
       <div class="info-card">
-        <label id="label-low-status">Free:</label>
-        <span class="info-card-data">0</span>
+        <label id="label-low-status" placement="right" ngbTooltip="Need any help?">Free:</label>
+        <span class="info-card-data">{{freeUsersCounter}}</span>
       </div>
       <div class="knowlodge-available-card">
         <label class="info-card-label">Knowlodge available:</label>

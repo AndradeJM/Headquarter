@@ -23,40 +23,50 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.isWorking = false;
+    this.user.isWorking = false;
   }
 
   newWorkSessionClick() {
     this.workSession = this.workSessionService.newWorkSession();
-    this.isWorking = true;
-    // this.user.
+    this.user.isWorking = true;
+    this.user.workSessions = [];
   }
 
   playPauseButtonClick(workSession) {
-    if(this.location) {
-      this.workSession.location = this.location;
+    if (this.location) {
+      this.user.location = this.location;
     }
-    this.workSessionService.playPauseWorksession(workSession);    
+    this.workSessionService.playPauseWorksession(workSession);
   }
 
 
 
   endWorkSessionClick(workSession) {
     this.workSessionService.endWorkSession(workSession);
-    this.isWorking = false;
+    this.user.isWorking = false;
+    this.user.workSessions.push(this.workSession);
+    // TODO: Save the workSession on the database.
   };
+
+ 
+  onSignOut(workSession) {
+    // The signOut is done with a link com the button.
+    // Here I just need to push the workSession to the user, saving it on the database.
+    this.user.workSessions.push(this.workSession);
+    // TODO: Save the workSession on the database.
+  } 
 
   // ****************************************
   // Functions - Status - Click
   // ****************************************
   statusHighClick() {
-    this.status = 3;
+    this.user.status = 3;
   }
   statusMidClick() {
-    this.status = 2;
+    this.user.status = 2;
   }
   statusLowClick() {
-    this.status = 1.
+    this.user.status = 1.
   }
   // ****************************************
 
@@ -65,11 +75,11 @@ export class HeaderComponent implements OnInit {
   // Functions - Location - Click
   // ****************************************
 
-  locationOfficeClick(workSesion) {
-    this.workSession.location = "Office"
+  locationOfficeClick() {
+    this.user.location = "Office"
   }
-  locationHomeClick(workSesion) {
-    this.workSession.location = "Home"
+  locationHomeClick() {
+    this.user.location = "Home"
   }
 
   // ****************************************
